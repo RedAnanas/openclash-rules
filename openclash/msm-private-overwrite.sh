@@ -1,6 +1,6 @@
 #!/bin/sh
 # 私密订阅与个人服务例外只在设备本地合并，不上传 GitHub。
-case "${1##*/}" in msm.yaml) ;; *) exit 0 ;; esac
+case "${1##*/}" in msm.yaml|yaml_config_tmp_msm.yaml) ;; *) exit 0 ;; esac
 ruby -ryaml -e '
   config = YAML.load_file(ARGV[0])
   private = YAML.load_file("/etc/openclash/custom/msm-private.yaml")
