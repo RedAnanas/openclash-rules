@@ -88,7 +88,9 @@ config.yaml 和 rule_provider/ 是编辑源文件。build.py 将 6 类自定义�
 
 以后换机场，在 Sub-Store 原订阅中修改链接，保持其名称和组合关系；手机更新订阅即可。修改公共规则或策略组时提交 GitHub 源文件，等待生成工作流完成，再更新手机订阅。手机配置不包含路由器私密文件中的个人服务例外。
 
-分享链接具有节点访问权限，只发给自己的设备；不要公开、不要上传仓库。路由器现有配置仍使用自己的本地覆写。
+分享链接具有节点访问权限，只发给自己的设备；不要公开、不要上传仓库。
+
+OpenClash 也可添加此完整订阅，配置名使用 `msm-unified` 并关闭在线转换。配套本地覆写脚本会为 `msm-unified.yaml` 保留个人规则与 DNS 例外，保留完整订阅内的节点；原 `msm.yaml` 仍使用本地机场注入方式。路由器的 DNS、IPv6、接管设置由 OpenClash 插件管理。
 
 ## 自动与手动分组
 
@@ -107,6 +109,7 @@ python -m unittest -v
 python build.py
 python check.py --config dist/config.yaml
 node substore/test-mobile.cjs
+ruby openclash/test-private-overwrite.rb
 ```
 
 check.py --online 可额外检查第三方下载地址，但不请求机场订阅。加载配置仍需用实际 Mihomo 内核验证，自动检查不能证明所有服务均可访问或解锁。
