@@ -22,7 +22,7 @@ begin
   SH
   File.chmod(0700, File.join(root, 'uci'))
 
-  %w[msm.yaml yaml_config_tmp_msm.yaml msm-unified.yaml yaml_config_tmp_msm-unified.yaml unrelated.yaml].each do |name|
+  %w[msm.yaml yaml_config_tmp_msm.yaml msm-unified.yaml yaml_config_tmp_msm-unified.yaml 组合节点.yaml yaml_config_tmp_组合节点.yaml unrelated.yaml].each do |name|
     provider = { 'type' => 'inline', 'payload' => [{ 'name' => '测试节点', 'type' => 'direct' }] }
     input = {
       'find-process-mode' => false,
@@ -41,7 +41,7 @@ begin
         raise '无关配置被改动' unless File.read(path) == original
       else
         raise 'off 类型错误' unless output['find-process-mode'] == 'off'
-        expected = name.include?('msm-unified') ? provider : { 'type' => 'http', 'url' => 'https://example.invalid/web' }
+        expected = name.include?('msm-unified') || name.include?('组合节点') ? provider : { 'type' => 'http', 'url' => 'https://example.invalid/web' }
         raise '节点源被错误替换' unless output['proxy-providers']['机场订阅'] == expected
         raise '个人规则未保留' unless output['rules'].include?(private_config['rules'][0])
         raise 'DNS 例外未保留' unless output['dns']['fake-ip-filter'].include?('+.example.test')

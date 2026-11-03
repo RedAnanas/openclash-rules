@@ -90,7 +90,7 @@ config.yaml 和 rule_provider/ 是编辑源文件。build.py 将 6 类自定义�
 
 分享链接具有节点访问权限，只发给自己的设备；不要公开、不要上传仓库。
 
-OpenClash 也可添加此完整订阅，配置名使用 `msm-unified` 并关闭在线转换。配套本地覆写脚本会为 `msm-unified.yaml` 保留个人规则与 DNS 例外，保留完整订阅内的节点；原 `msm.yaml` 仍使用本地机场注入方式。路由器的 DNS、IPv6、接管设置由 OpenClash 插件管理。
+OpenClash 也可添加此完整订阅，配置名使用 `组合节点`（兼容旧名称 `msm-unified`）并关闭在线转换。配套本地覆写脚本会为 `组合节点.yaml` 和 `msm-unified.yaml` 保留个人规则与 DNS 例外，保留完整订阅内的节点；原 `msm.yaml` 仍使用本地机场注入方式。路由器的 DNS、IPv6、接管设置由 OpenClash 插件管理。
 
 ## 自动与手动分组
 

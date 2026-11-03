@@ -1,12 +1,12 @@
 #!/bin/sh
 # 私密订阅与个人服务例外只在设备本地合并，不上传 GitHub。
-case "${1##*/}" in msm.yaml|yaml_config_tmp_msm.yaml|msm-unified.yaml|yaml_config_tmp_msm-unified.yaml) ;; *) exit 0 ;; esac
+case "${1##*/}" in msm.yaml|yaml_config_tmp_msm.yaml|msm-unified.yaml|yaml_config_tmp_msm-unified.yaml|组合节点.yaml|yaml_config_tmp_组合节点.yaml) ;; *) exit 0 ;; esac
 ruby -ryaml -e '
   config = YAML.load_file(ARGV[0])
   # 兼容订阅生成器未加引号的 off，避免 YAML 1.1 将其解析为布尔值。
   config["find-process-mode"] = "off" if config["find-process-mode"] == false
   private = YAML.load_file("/etc/openclash/custom/msm-private.yaml")
-  unless File.basename(ARGV[0]).end_with?("msm-unified.yaml")
+  unless File.basename(ARGV[0]).end_with?("msm-unified.yaml", "组合节点.yaml")
     airport_url = ENV["MSM_AIRPORT_URL"]
     if IO.popen(["uci", "-q", "get", "openclash.msm_airport.enable"], &:read).strip == "1"
       param = IO.popen(["uci", "-q", "get", "openclash.msm_airport.param"], &:read)
