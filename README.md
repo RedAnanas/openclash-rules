@@ -75,6 +75,21 @@ config.yaml 和 rule_provider/ 是编辑源文件。build.py 将 6 类自定义�
 
 这套方式由 Mihomo 直接读取节点。订阅转换器“机场链接＋规则模板”也是可选方案，但需要匹配的转换模板和可用的转换后端；当前 GitHub 主 YAML 不能直接作为 subconverter 的外部 INI 模板。
 
+## Android 完整订阅
+
+可复用 Sub-Store 的“文件”功能，把 GitHub 模板和已保存的组合订阅合成完整配置：
+
+1. 新建 Mihomo 配置，名称填写 `msm-mobile`，来源选远程，URL 使用本仓库的 `dist/config.yaml` 原始链接；启用“不使用缓存”，下载失败时停止生成。
+2. 添加“从订阅添加节点”操作，来源选组合订阅及自己的组合名称，位置选替换。
+3. 在其后添加“脚本操作”，选择本地脚本，粘贴 [substore/mobile.js](substore/mobile.js) 内容。
+4. 保存并生成仅针对该文件的分享链接。在 Clash Meta for Android 中选择“配置 → ＋ → 从 URL 导入”，填写此分享链接。
+
+节点会内嵌在下载的配置中，外出时无需访问家中的订阅服务；更新订阅时需要能连接该服务。当前维护者使用内网入口，在家中 Wi-Fi 下更新即可。脚本关闭手机配置的局域网代理共享，保留全部分流与自动选择组。
+
+以后换机场，在 Sub-Store 原订阅中修改链接，保持其名称和组合关系；手机更新订阅即可。修改公共规则或策略组时提交 GitHub 源文件，等待生成工作流完成，再更新手机订阅。手机配置不包含路由器私密文件中的个人服务例外。
+
+分享链接具有节点访问权限，只发给自己的设备；不要公开、不要上传仓库。路由器现有配置仍使用自己的本地覆写。
+
 ## 自动与手动分组
 
 地区组、高级、省流、游戏、自动选择，以及 XS 日本自动和 XS 美国自动使用 url-test。XS 两组仅筛选对应地区且以 XS 开头的节点，每 300 秒测速，容差 50 毫秒。
@@ -91,6 +106,7 @@ python check.py
 python -m unittest -v
 python build.py
 python check.py --config dist/config.yaml
+node substore/test-mobile.cjs
 ```
 
 check.py --online 可额外检查第三方下载地址，但不请求机场订阅。加载配置仍需用实际 Mihomo 内核验证，自动检查不能证明所有服务均可访问或解锁。
