@@ -1,0 +1,37 @@
+name: 校验并生成远程订阅
+on:
+  push:
+    branches: [main]
+    paths:
+    - config.yaml
+    - rule_provider/**
+    - build.py
+    - check.py
+    - test_check.py
+    - requirements.txt
+    - .github/workflows/publish.yaml
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: 规则发布
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+    - run: python -m pip install -r requirements.txt
+    - run: python check.py && python -m unittest -v && python build.py && python check.py --config dist/config.yaml
+    - name: 提交生成文件
+      run: |
+        git config user.name 'github-actions[bot]'
+        git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+        git add dist/config.yaml
+        if ! git diff --cached --quiet; then
+          git commit -m '构建：更新远程订阅配置'
+          git push
+        fi

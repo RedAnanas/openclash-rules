@@ -1,0 +1,4 @@
+# 仅填写匹配条件，不填写策略组；一行一条。
+# 删除条目即可取消例外，空文件保留 payload: []。
+payload:
+- DOMAIN-SUFFIX,u2.dmhy.org

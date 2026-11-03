@@ -1,0 +1,18 @@
+# 仅用于说明本地文件格式。真实文件放在路由器上，不提交到 Git。
+proxy-providers:
+  机场订阅:
+    type: http
+    url: https://example.invalid/replace-with-your-subscription
+    path: ./proxy_provider/msm-nodes.yaml
+    interval: 3600
+    header:
+      User-Agent:
+      - mihomo
+    health-check:
+      enable: true
+      url: https://www.gstatic.com/generate_204
+      interval: 300
+      lazy: true
+rules: []
+dns:
+  fake-ip-filter: []

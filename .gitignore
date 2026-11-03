@@ -1,0 +1,11 @@
+config.local.yaml
+*.private.*
+msm-rules/cache/
+proxy_provider/
+.validation/
+__pycache__/
+*.zip
+rule_provider/*.mrs
+README.local.md
+DEPLOYMENT.md
+VALIDATION.md

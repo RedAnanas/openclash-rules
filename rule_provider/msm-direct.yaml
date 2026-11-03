@@ -1,0 +1,17 @@
+# 公开直连例外；私密服务域名放在设备本地配置。
+payload:
+- DST-PORT,123
+- DOMAIN-SUFFIX,test-ipv6.com
+- DOMAIN-SUFFIX,ipv6ready.me
+- DOMAIN-SUFFIX,ipv6-test.com
+- DOMAIN-SUFFIX,ifconfig.me
+- DOMAIN-SUFFIX,myexternalip.com
+- DOMAIN-SUFFIX,api64.ipify.org
+- DOMAIN-SUFFIX,gh-proxy.com
+- DOMAIN-SUFFIX,dnsany.com
+- DOMAIN-SUFFIX,cmvideo.cn
+- DOMAIN-SUFFIX,chinamobile.com
+- DOMAIN-SUFFIX,mobaibox.com
+- DOMAIN-SUFFIX,gitv.tv
+- DOMAIN-SUFFIX,cctv.cn
+- DOMAIN-SUFFIX,yangshipin.cn
