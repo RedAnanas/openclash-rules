@@ -441,7 +441,8 @@ rule-providers:
   个人AI:
     type: inline
     behavior: classical
-    payload: []
+    payload:
+    - DOMAIN-SUFFIX,agentrouter.org
   个人PT:
     type: inline
     behavior: classical
